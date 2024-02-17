@@ -1,88 +1,107 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fertilizer Prediction</title>
-</head>
-<style>
-      input[type=submit] {
-          background-color: #0066A2;
-          border-color: #0066A2;
-          border-style: outset;
-          color: white;
-          border: 1px solid #eee;
-          border-radius: 10px;
-          padding: 12px 25px;
-          font: bold 20px arial, sans-serif;
-          margin: 4px 2px;
-          cursor: pointer;
-      }
-      input[type="number"] {
-          font-family:courier;
-          height: 20px;
-          width: 190px;
-          border-radius: 10px;
-          text-align: center;
-      }
-      input[type="number"]::placeholder {
-          font-weight: lighter;
-          text-align: center;
-      }
-      body {
-            background: linear-gradient(#f69d3c, #3f87a6);
-              }
-      h1 {
-          color: white;
-          text-shadow: 1px 1px 2px red, 0 0 25px black;
-      }
-      select {
-           width: 200px;
-           text-align-last:center;
-           border-radius: 10px;
-           font-family:courier;
-           font-size:15px;
-           font-weight: bold;
-           height: 25px;
-      }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESA NEDC 2024 - Fertilizer Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            /* Remove or adjust these properties */
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            height: 100%;
+            padding: 20px; /* Add some padding */
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            margin: auto; /* Center horizontally */
+            min-height: 100vh; /* Adjust as needed */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input[type="number"], select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            color: #495057;
+        }
     </style>
-<body style="text-align:center;">
- <div>
-	<h1><u>Fertilizer Prediction</u></h1>
-     <h1>{{x}}</h1>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}" method="post" id="Home">
-
-        <label for="temp" style="font-size:130%;"><b>Temperature:</b></label><br>
-        <input type="number" name="temp" placeholder="Enter the value" required="required" /><br><br>
-
-        <label for="humid" style="font-size:130%;"><b>Humidity in %:</b></label><br>
-        <input type="number" name="humid" placeholder="Enter the value" required="required" /><br><br>
-
-        <label for="mois" style="font-size:130%;"><b>Moisture:</b></label><br>
-        <input type="number" name="mois" placeholder="Enter the value" required="required" /><br><br>
-
-        <label for="soil" style="font-size:130%;"><b>Soil Type:</b></label><br>
-        <select name="soil" id="soil" >
-            <option value=0>Black</option>
-            <option value=1>Clayey</option>
-            <option value=2>Loamy</option>
-            <option value=3>Red</option>
-            <option value=4>Sandy</option>
-        </select><br><br>
-
-        <label for="nitro" style="font-size:130%;"><b>Nitrogen:</b></label><br>
-        <input type="number" name="nitro" placeholder="Enter the value" required="required" /><br><br>
-
-        <label for="pota" style="font-size:130%;"><b>Pottasium:</b></label><br>
-        <input type="number" name="pota" placeholder="Enter the value" required="required" /><br><br>
-
-        <label for="phos" style="font-size:130%;"><b>Phosphorous:</b></label><br>
-        <input type="number" name="phos" placeholder="Enter the value" required="required" /><br><br>
-
-        <input type="submit" >
-    </form>
- </div>
-
+</head>
+<body>
+    <div class="container">
+        <h1>MESA NEDC 2024 - Fertilizer Prediction</h1>
+        <form action="{{ url_for('predict')}}" method="post">
+            <input type="number" name="temp" placeholder="Temperature" value="{{ temp }}" required>
+            <input type="number" name="humid" placeholder="Humidity (%)" value="{{ humid }}" required>
+            <input type="number" name="mois" placeholder="Moisture" value="{{ mois }}" required>
+            <select name="soil" required>
+                <option value="">Select Soil Type</option>
+                <option value="0" {% if soil_type == "0" %}selected{% endif %}>Black</option>
+                <option value="1" {% if soil_type == "1" %}selected{% endif %}>Clayey</option>
+                <option value="2" {% if soil_type == "2" %}selected{% endif %}>Loamy</option>
+                <option value="3" {% if soil_type == "3" %}selected{% endif %}>Red</option>
+                <option value="4" {% if soil_type == "4" %}selected{% endif %}>Sandy</option>
+            </select>
+            <input type="number" name="nitro" placeholder="Nitrogen" value="{{ nitro }}" required>
+            <input type="number" name="pota" placeholder="Potassium" value="{{ pota }}" required>
+            <input type="number" name="phos" placeholder="Phosphorous" value="{{ phosp }}" required>
+            <input type="submit" value="Predict">
+        </form>
+        {% if recommended_fertilizer %}
+        <div class="result">
+            <h2>Recommended Fertilizer: {{ recommended_fertilizer }}</h2>
+            <p>{{ description }}</p>
+            <h3>Organic Alternatives:</h3>
+            <ul>
+                {% for alternative in alternatives %}
+                <li>{{ alternative }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>

@@ -5,10 +5,40 @@ app = Flask(__name__)
 classifier = pickle.load(open(r'fertilizer_rec_system\classifier.pkl', 'rb'))
 fertilizers = pickle.load(open(r'fertilizer_rec_system\fertilizers.pkl', 'rb'))
 
+fertilizer_info = {
+    "10-26-26": {
+        "description": "Description of FertilizerA. Suitable for conditions X, Y, Z.",
+        "alternatives": ["Organic Alternative 1", "Organic Alternative 2"]
+    },
+    "14-35-14": {
+        "description": "Description of FertilizerB. Best used in situations A, B, C.",
+        "alternatives": ["Organic Alternative 3", "Organic Alternative 4"]
+    },
+    "17-17-17": {
+        "description": "Description of FertilizerA. Suitable for conditions X, Y, Z.",
+        "alternatives": ["Organic Alternative 1", "Organic Alternative 2"]
+    },
+    "20-20": {
+        "description": "Description of FertilizerB. Best used in situations A, B, C.",
+        "alternatives": ["Organic Alternative 3", "Organic Alternative 4"]
+    },
+    "28-28": {
+        "description": "Description of FertilizerA. Suitable for conditions X, Y, Z.",
+        "alternatives": ["Organic Alternative 1", "Organic Alternative 2"]
+    },
+    "DAP": {
+        "description": "Description of FertilizerB. Best used in situations A, B, C.",
+        "alternatives": ["Organic Alternative 3", "Organic Alternative 4"]
+    },
+    "Urea": {
+        "description": "Description of FertilizerB. Best used in situations A, B, C.",
+        "alternatives": ["Organic Alternative 3", "Organic Alternative 4"]
+    }
+}
 
 @app.route('/')
 def welcome():
-    return render_template('index.html')
+    return render_template('new_index.html')
 
 
 @app.route('/predict', methods=['POST'])
@@ -29,14 +59,23 @@ def predict():
         int(pota),
         int(phosp)
         ]
-    res = fertilizers.classes_[classifier.predict([input])]
-    return render_template('index.html', x=f'Predicted Fertilizer is {res}')
+    res = fertilizers.classes_[classifier.predict([input])][0]
+    fert_description = fertilizer_info[res]['description']
+    org_alt = fertilizer_info[res]['alternatives']
+    return render_template(
+        'new_index.html',
+        temp=temp,
+        humid=humid,
+        mois=mois,
+        soil_type=soil_type,
+        nitro=nitro,
+        pota=pota,
+        phosp=phosp,
+        recommended_fertilizer=res,
+        description=fert_description,
+        alternatives=org_alt
+    )
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-''' 1 routes information from arduino as averages over time 
-# 2 gets reccomendation for fertilizer from classifer.pkl
-# 3 lists data from arduino, organic/cost-effective alternatives on website
-# 4 remember to set up informative, pretty website '''
