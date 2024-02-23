@@ -4,75 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MESA NEDC 2024 - Fertilizer Prediction</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            /* Remove or adjust these properties */
-            /* display: flex;
-            justify-content: center;
-            align-items: center; */
-            height: 100%;
-            padding: 20px; /* Add some padding */
-        }
-
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 600px;
-            margin: auto; /* Center horizontally */
-            min-height: 100vh; /* Adjust as needed */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center content vertically */
-            overflow-y: auto;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        input[type="number"], select {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            color: #495057;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<div class="flex-container">
     <div class="container">
         <h1>MESA NEDC 2024 - Fertilizer Prediction</h1>
+        <div class="welcome-section">
+            <h2>Welcome to the Smart Garden</h2>
+            <div class="welcome-info">
+                Here's some interesting information about how to use this smart garden system effectively. Learn how to optimize your garden's growth with our smart recommendations.
+            </div>
+        </div>
         <form action="{{ url_for('predict')}}" method="post">
             <input type="number" name="temp" placeholder="Temperature" value="{{ temp }}" required>
             <input type="number" name="humid" placeholder="Humidity (%)" value="{{ humid }}" required>
@@ -103,5 +47,11 @@
         </div>
         {% endif %}
     </div>
+    <div class="data-viewing">
+        <h2>Data</h2>
+        <canvas id="soilMoistureChart"></canvas> 
+    </div>
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

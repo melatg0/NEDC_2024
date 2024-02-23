@@ -1,11 +1,13 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import pickle
+import time 
+from arduino_data.export_data import get_soil_value
 
 app = Flask(__name__)
 classifier = pickle.load(open(r'fertilizer_rec_system\classifier.pkl', 'rb'))
 fertilizers = pickle.load(open(r'fertilizer_rec_system\fertilizers.pkl', 'rb'))
 
-fertilizer_info = {
+fertilizer_info = { # Possibly use the organic alternatives to estimate $ comparisons 
     "10-26-26": {
         "description": "Description of FertilizerA. Suitable for conditions X, Y, Z.",
         "alternatives": ["Organic Alternative 1", "Organic Alternative 2"]
@@ -38,8 +40,7 @@ fertilizer_info = {
 
 @app.route('/')
 def welcome():
-    return render_template('new_index.html')
-
+    return render_template('index.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -63,7 +64,7 @@ def predict():
     fert_description = fertilizer_info[res]['description']
     org_alt = fertilizer_info[res]['alternatives']
     return render_template(
-        'new_index.html',
+        'index.html',
         temp=temp,
         humid=humid,
         mois=mois,
@@ -76,6 +77,11 @@ def predict():
         alternatives=org_alt
     )
 
+@app.route('/soil-moisture')
+def soil_moisture():
+    # Simulate getting a soil moisture value
+    moisture_value = get_soil_value()
+    return jsonify({"moisture": moisture_value, "time": time.time()})
 
 if __name__ == '__main__':
     app.run(debug=True)
