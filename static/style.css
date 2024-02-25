@@ -1,14 +1,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-color: #f4f4f4;
-    /* Remove or adjust these properties */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    height: 100%;
-    padding: 20px; /* Add some padding */
 }
 
 .container {
@@ -19,35 +13,33 @@ body {
     width: 80%;
     max-width: 600px;
     margin: auto; /* Center horizontally */
-    min-height: 100vh; /* Adjust as needed */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
     overflow-y: auto;
 }
 
-h1 {
+h1, .welcome-section h2 {
     color: #333;
     text-align: center;
 }
+
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 .welcome-section h2 {
-    color: #356859; /* Adjust the color to fit your design */
-    text-align: center;
     margin-bottom: 10px;
 }
 
-.welcome-info {
+.welcome-info, .result {
     background-color: #fdfdfd; /* Light background for visibility */
     color: #333; /* Text color */
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Space before the form starts */
+    margin-bottom: 20px; /* Space before and after the form */
 }
 
 input[type="number"], select {
@@ -56,6 +48,7 @@ input[type="number"], select {
     border: 1px solid #ccc;
     font-size: 16px;
 }
+
 input[type="submit"] {
     background-color: #007bff;
     color: white;
@@ -66,39 +59,33 @@ input[type="submit"] {
     font-size: 18px;
     transition: background-color 0.3s ease;
 }
+
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
-.result {
-    margin-top: 20px;
-    background-color: #e9ecef;
-    padding: 10px;
-    border-radius: 5px;
-    color: #495057;
-}
+
 .flex-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align items at the start of the flex container */
-    gap: 20px; /* Optional: Adds space between your main content and data box */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 20px; /* Adds space between sections */
     padding: 20px; /* Padding around the entire layout */
-    max-width: 1200px; /* Or any max-width or width you prefer */
-    margin: auto; /* Center the flex container */
+    justify-content: center; /* Center items horizontally */
 }
 
-.container, .data-viewing {
-    flex: 1; /* Each child will take up equal space */
-    /* You might want to set a min-width for smaller screens */
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column; /* Stack elements vertically on small screens */
+    }
+
+    .container {
+        width: 90%; /* Increase width on smaller screens for better readability */
+        margin: 20px auto; /* Adjust margin for spacing */
+    }
 }
 
-.data-viewing {
-    background-color: #ffffff; /* Dark background for the data box */
-    color: white; /* Text color for visibility */
-    padding: 20px; /* Padding inside the data box */
-    border-radius: 8px; /* Optional: Matches the style of your main content */
-    height: fit-content; /* Adjust the height as necessary */
-}
-
-.data-viewing h2 {
-    margin: 0 0 20px 0; /* Adjust spacing around the DATA header */
+/* Highlighting dynamic data fields */
+input[readonly] {
+    background-color: #eef9f2; /* Light green background for readonly inputs */
+    color: #356859; /* Dark green text for contrast */
 }

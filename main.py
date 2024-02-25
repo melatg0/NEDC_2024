@@ -1,11 +1,10 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
 import pickle
-import time 
-from arduino_data.export_data import get_soil_value
+from arduino_data.export_data import read_line
 
 app = Flask(__name__)
-classifier = pickle.load(open(r'fertilizer_rec_system\classifier.pkl', 'rb'))
-fertilizers = pickle.load(open(r'fertilizer_rec_system\fertilizers.pkl', 'rb'))
+classifier = pickle.load(open('fertilizer_rec_system/classifier.pkl', 'rb'))
+fertilizers = pickle.load(open('fertilizer_rec_system/fertilizers.pkl', 'rb'))
 
 fertilizer_info = { # Possibly use the organic alternatives to estimate $ comparisons 
     "10-26-26": {
@@ -40,48 +39,50 @@ fertilizer_info = { # Possibly use the organic alternatives to estimate $ compar
 
 @app.route('/')
 def welcome():
-    return render_template('index.html')
+    sensor_values = read_line()
+    return render_template('index.html', sensor_values=sensor_values)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    temp = request.form.get('temp')
-    humid = request.form.get('humid')
-    mois = request.form.get('mois')
-    soil_type = request.form.get('soil')
-    nitro = request.form.get('nitro')
-    pota = request.form.get('pota')
-    phosp = request.form.get('phos')
-    input = [
-        int(temp),
-        int(humid),
-        int(mois),
+    sensor_values = read_line()
+    soil_type = request.form['soil']
+    temp, humid, mois, nitro, pota, phosp = sensor_values
+
+    input_feature = [
+        temp,
+        humid,
+        mois,
         int(soil_type),
-        int(nitro),
-        int(pota),
-        int(phosp)
-        ]
-    res = fertilizers.classes_[classifier.predict([input])][0]
+        nitro,
+        pota,
+        phosp
+    ]
+    prediction = classifier.predict([input_feature])[0]
+    res = fertilizers[prediction]
     fert_description = fertilizer_info[res]['description']
     org_alt = fertilizer_info[res]['alternatives']
+
     return render_template(
         'index.html',
-        temp=temp,
-        humid=humid,
-        mois=mois,
+        sensor_values=sensor_values,
         soil_type=soil_type,
-        nitro=nitro,
-        pota=pota,
-        phosp=phosp,
         recommended_fertilizer=res,
         description=fert_description,
         alternatives=org_alt
     )
 
-@app.route('/soil-moisture')
-def soil_moisture():
-    # Simulate getting a soil moisture value
-    moisture_value = get_soil_value()
-    return jsonify({"moisture": moisture_value, "time": time.time()})
+@app.route('/fetch-sensor-data')
+def fetch_sensor_data():
+    # Assume read_line() is modified or another function is used to fetch all required sensor data
+    sensor_values = read_line() or (0, 0, 0, 0, 0, 0)  # Temp, Humid, Mois, Nitro, Pota, Phosp
+    return jsonify({
+        "temp": sensor_values[0],
+        "humid": sensor_values[1],
+        "mois": sensor_values[2],
+        "nitro": sensor_values[3],
+        "pota": sensor_values[4],
+        "phosp": sensor_values[5],
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)
