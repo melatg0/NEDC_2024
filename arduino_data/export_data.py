@@ -2,7 +2,7 @@ import serial
 import time
 
 # Establish a connection to the COM port the Arduino is connected to.
-ser = serial.Serial('COM4', 9600)
+ser = serial.Serial('COM4', 4800)
 time.sleep(2)  # Wait for the connection to establish
 
 def read_line():
@@ -17,8 +17,8 @@ def read_line():
             phosphorus = int(values[1])
             potassium = int(values[2])
             soil_mois = int(values[3])
-            temp = float(values[4])
-            humid = float(values[5])
+            temp = int(round(float(values[4])))
+            humid = int(round(float(values[5])))
             return nitrogen, phosphorus, potassium, soil_mois, temp, humid
     return None
 

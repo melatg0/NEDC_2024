@@ -3,46 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MESA NEDC 2024 - Fertilizer Prediction</title>
+    <title id="pageTitle">Seed.link</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="static\icon.png">
 </head>
 <body>
 <div class="header">
-    <h1>MESA NEDC 2024 - Fertilizer Prediction</h1>
-    <p>Welcome to the Smart Garden. This is a system designed to help you optimize your garden's growth with smart recommendations. Learn how to enhance your garden's fertility with our advanced prediction tools.</p>
-</div>
-<div class="main-content">
-    <form action="{{ url_for('predict') }}" method="post">
-        <!-- Display sensor values -->
-        <input type="number" name="temp" placeholder="Temperature" value="{{ sensor_values[0] }}" required readonly>
-        <input type="number" name="humid" placeholder="Humidity" value="{{ sensor_values[1] }}" required readonly>
-        <input type="number" name="mois" placeholder="Moisture" value="{{ sensor_values[2] }}" required readonly>
-        <input type="number" name="nitro" placeholder="Nitrogen" value="{{ sensor_values[3] }}" required readonly>
-        <input type="number" name="pota" placeholder="Potassium" value="{{ sensor_values[4] }}" required readonly>
-        <input type="number" name="phos" placeholder="Phosphorous" value="{{ sensor_values[5] }}" required readonly>
-
-        <select name="soil" required>
-            <option value="0">Black</option>
-            <option value="1">Clayey</option>
-            <option value="2">Loamy</option>
-            <option value="3">Red</option>
-            <option value="4">Sandy</option>
-        </select>
-        <input type="submit" value="Predict">
-    </form>
-    {% if recommended_fertilizer %}
-    <div class="result">
-        <h2>Recommended Fertilizer: {{ recommended_fertilizer }}</h2>
-        <p>{{ description }}</p>
-        <ul>
-            {% for alternative in alternatives %}
-            <li>{{ alternative }}</li>
-            {% endfor %}
-        </ul>
+    <h1 id="headerTitle">Seed.link - Fertilizer Prediction</h1>
+    <div class="banner"> <img src="static\logo.PNG">
     </div>
-    {% endif %}
+    <p id="welcomeMsg">Welcome to the Seed.link. This is a system designed to help you optimize your garden's growth with smart recommendations. Learn how to enhance your garden's fertility with our advanced prediction tools.</p>
+    <a id="gardeningTipsLink" href="{{ url_for('gardening_tips') }}">Gardening and Composting Tips</a>
+    <button id="langToggleBtn">Español</button>
+</div>
+<div class="flex-container">
+    <div class="form-container">
+        <form action="{{ url_for('predict') }}" method="post">
+            <input type="hidden" name="lang" id="lang" value="{{ currentLanguage }}">
+            <div class="input-group">
+                <label id="tempLabel" for="temp">Temperature (C):</label>
+                <input type="number" id="temp" name="temp" value="{{ sensor_values[4] }}" required readonly>
+            </div>
+            <div class="input-group">
+                <label id="humidLabel" for="humid">Humidity (%):</label>
+                <input type="number" id="humid" name="humid" value="{{ sensor_values[5] }}" required readonly>
+            </div>
+            <div class="input-group">
+                <label id="moisLabel" for="mois">Moisture:</label>
+                <input type="number" id="mois" name="mois" value="{{ sensor_values[3] }}" required readonly>
+            </div>
+            <div class="input-group">
+                <label id="nitroLabel" for="nitro">Nitrogen (mg/kg) :</label>
+                <input type="number" id="nitro" name="nitro" value="{{ sensor_values[0] }}" required readonly>
+            </div>
+            <div class="input-group">
+                <label id="potaLabel" for="pota">Potassium (mg/kg):</label>
+                <input type="number" id="pota" name="pota" value="{{ sensor_values[1] }}" required readonly>
+            </div>
+            <div class="input-group">
+                <label id="phosLabel" for="phos">Phosphorous (mg/kg):</label>
+                <input type="number" id="phos" name="phos" value="{{ sensor_values[2] }}" required readonly>
+            </div>
+            <div class="input-group">
+                <label id="soilTypeLabel" for="soil">Soil Type:</label>
+                <select id="soil" name="soil" required>
+                    <option value="0">Black</option>
+                    <option value="1">Clayey</option>
+                    <option value="2">Loamy</option>
+                    <option value="3">Red</option>
+                    <option value="4">Sandy</option>
+                </select>
+            </div>
+            <input id="predictButton" type="submit" value="Predict">
+        </form>
+    </div>
+    {% if recommended_fertilizer %}
+<div class="result">
+    <h2 id="fertilizerRecommendation">Recommended Fertilizer: {{ recommended_fertilizer }}</h2>
+    <p id="fertilizerDescription">{{ description }}</p>
+    <h3 id="organicAlternativesTitle">Organic Alternatives:</h3>
+    <ul id="organicAlternativesList">
+        {% for alternative in alternatives %}
+        <li>{{ alternative }}</li>
+        {% endfor %}
+    </ul>
+    <h3 id="moreInfoTitle">Resources for More Information:</h3>
+    <ul id="moreInfoList">
+        {% for resource in resources %}
+        <li><a href="{{ resource }}" target="_blank">{{ resource }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 </div>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='translations.js') }}"></script>
 </body>
 </html>

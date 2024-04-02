@@ -1,91 +1,86 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Basic Reset */
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+    padding: 0;
 }
 
-.container {
-    background-color: #fff;
+
+
+body {
+    font-family: 'Poppins', sans-serif; /* Fun and readable font */
+    background-color: #f0f4f8; /* Soft blue background */
+    color: #333; /* Darker text for better readability */
+    line-height: 1.6;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
-    margin: auto; /* Center horizontally */
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
 }
 
-h1, .welcome-section h2 {
-    color: #333;
+.header {
+    background-color: #3c6856; /* Pastel green for header background */
+    color: #fff;
     text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.welcome-section h2 {
-    margin-bottom: 10px;
-}
-
-.welcome-info, .result {
-    background-color: #fdfdfd; /* Light background for visibility */
-    color: #333; /* Text color */
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px; /* Space before and after the form */
-}
-
-input[type="number"], select {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
-
-input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
+.banner img {
+    width: 350px; /* Adjust for body padding */
+    height: 100px; /* Maintain aspect ratio */
+    display: block; /* Remove any default spacing */
+    margin: 0 auto; /* Center the image if it's not full width */
 }
 
 .flex-container {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    gap: 20px; /* Adds space between sections */
-    padding: 20px; /* Padding around the entire layout */
-    justify-content: center; /* Center items horizontally */
+    justify-content: space-between;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .flex-container {
-        flex-direction: column; /* Stack elements vertically on small screens */
-    }
-
-    .container {
-        width: 90%; /* Increase width on smaller screens for better readability */
-        margin: 20px auto; /* Adjust margin for spacing */
-    }
+.form-container, .result {
+    width: 48%; /* Maintain half-and-half layout */
+    background-color: #fefbd8; /* Soft yellow for form and result containers */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Highlighting dynamic data fields */
-input[readonly] {
-    background-color: #eef9f2; /* Light green background for readonly inputs */
-    color: #356859; /* Dark green text for contrast */
+input[type="number"], select, input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #ffdfba; /* Soft orange for buttons */
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #f0b27a;
+}
+
+a, button {
+    background-color: #9ad3bc; /* Changed from purple to a soft teal */
+    color: #fff;
+    padding: 6px 10px; /* Adjusted padding for links */
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a:hover, button:hover {
+    background-color: #88c9b7;
+}
+
+
+/* Additional styles can be added based on specific needs or sections */

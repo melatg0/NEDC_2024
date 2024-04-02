@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="gardeningTipsTitle">Gardening and Composting Tips</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <button id="langToggleBtn">Español</button>
+    <link rel="icon" type="image/png" href="static\icon.png">
+</head>
+<body>
+<div class="header">
+    <h1 id="tipsHeaderTitle">Beginner Gardening and Composting Tips</h1>
+    <header class="banner"><img src="static\logo.PNG">
+    </header>
+    <p id="tipsIntro">Unlock the secrets of starting your own garden and creating compost, even on a tight budget.</p>
+    <a id="gardeningTipsLink" href="{{ url_for('welcome') }}">Back for Fertilizer Recommendations</a>
+</div>
+<div class="content">
+    <section>
+        <h2 id="gettingStartedTitle">Getting Started with Gardening</h2>
+        <p id="gettingStartedDesc">Starting a garden can be a rewarding experience. Here are tips to get started, even in limited spaces or with limited resources:</p>
+        <ul id="gettingStartedList">
+            <li id="startSmall"><strong>Start Small:</strong> Begin with a few pots or a small plot to manage your workload and costs.</li>
+            <li id="useWhatYouHave"><strong>Use What You Have:</strong> Recycle containers or find free pots and gardening tools from community groups or online marketplaces.</li>
+            <li id="chooseLowCostPlants"><strong>Choose Low-Cost Plants:</strong> Opt for seeds or cuttings from friends and family. Some easy-to-grow vegetables include lettuce, radishes, and tomatoes.</li>
+            <li id="compost"><strong>Compost:</strong> Create your own nutrient-rich soil by composting kitchen scraps and yard waste.</li>
+            <li id="waterWisely"><strong>Water Wisely:</strong> Collect rainwater and learn the best times to water your plants to save on your water bill.</li>
+        </ul>
+        <p id="gettingStartedResources">For more detailed guidance, check out <a href="https://www.gardeners.com/how-to/vegetable-gardening/5069.html" target="_blank">Gardener's Supply Company's Vegetable Gardening Guide</a> and this helpful <a href="https://www.youtube.com/watch?v=IOu0DuxFAT0" target="_blank">video on starting a vegetable garden</a>.</p>
+    </section>
+    <section>
+        <h2 id="creatingCompostTitle">Creating Your Compost</h2>
+        <p id="creatingCompostDesc">Composting is easier than you think! Here's how to start turning your kitchen and garden waste into gold:</p>
+        <ul id="creatingCompostList">
+            <li id="chooseSpot"><strong>Choose a Spot:</strong> Any corner of your yard or balcony can host a small compost bin.</li>
+            <li id="balanceGreensBrowns"><strong>Balance Greens and Browns:</strong> Mix equal parts of green (vegetable scraps, coffee grounds) and brown (dry leaves, cardboard) materials.</li>
+            <li id="keepItMoist"><strong>Keep It Moist:</strong> Your compost should be damp, but not wet, to support decomposition.</li>
+            <li id="turnRegularly"><strong>Turn Regularly:</strong> Aerate your compost by turning it every few weeks to speed up the process.</li>
+        </ul>
+        <p id="creatingCompostResources">For budget-friendly composting methods, explore <a href="https://www.epa.gov/recycle/composting-home" target="_blank">EPA's guide to composting at home</a>. Additionally, this <a href="https://www.youtube.com/watch?v=n9OhxKlrWwc" target="_blank">video tutorial on composting</a> can provide visual aid to beginners.</p>
+    </section>
+    <section>
+        <h2 id="snapBenefitsTitle">Maximizing SNAP Benefits for Gardening</h2>
+        <p id="snapBenefitsDesc">For individuals and families receiving SNAP benefits, gardening offers a unique opportunity to extend those benefits further by growing your own food. Utilizing SNAP benefits to purchase seeds and plants can lead to sustainable food production, providing fresh and nutritious produce right from your backyard or community garden.</p>
+        <p id="snapBenefitsTips">Here are some tips for starting your garden with SNAP benefits:</p>
+        <ul id="snapBenefitsList">
+            <li id="verifyEligibleItems">Verify eligible items: Seeds and plants that produce food for the household to eat can be purchased with SNAP benefits.</li>
+            <li id="planYourGarden">Plan your garden: Choose plants that are suitable for your region and consider starting with easy-to-grow vegetables and herbs.</li>
+        <li id="seekOutResources">Seek out resources: Local cooperative extensions, community gardens, and online forums can offer valuable advice and support for beginner gardeners.</li>
+        </ul>
+        <p id="snapBenefitsMoreInfo">For more comprehensive information on using SNAP benefits for gardening, visit the <a href="https://www.snapgardens.org/snap-participant/" target="_blank">SNAP Gardens</a> website. This resource provides guidance on how to make the most of your benefits, supporting both your family's nutrition and budget.</p>
+    </section>
+    <section>
+        <h2 id="apartmentGardeningTitle">Gardening in Small Spaces and Apartments</h2>
+        <p id="apartmentGardeningDesc">Limited space doesn't mean you can't enjoy gardening! Here are tips for creating a green oasis in smaller living areas:</p>
+        <ul id="apartmentGardeningList">
+            <li id="verticalGardening"><strong>Vertical Gardening:</strong> Utilize vertical space by installing hanging planters, shelves, or a trellis to grow plants upwards instead of outwards.</li>
+            <li id="containerGardening"><strong>Container Gardening:</strong> Pots and containers are perfect for small spaces. Choose varieties that are suitable for pot growing, like dwarf vegetables, herbs, and succulents.</li>
+            <li id="windowSillsBalconies"><strong>Use Window Sills and Balconies:</strong> Take advantage of natural light by placing plants on window sills or balconies. Even a small herb garden can thrive in these spaces.</li>
+            <li id="hydroponics"><strong>Explore Hydroponics:</strong> Hydroponic systems allow you to grow plants in water, without soil. These systems can be very space-efficient and are perfect for indoor gardening.</li>
+            <li id="selectivePlanting"><strong>Be Selective in Planting:</strong> Focus on plants that offer a high yield or that you enjoy. Leafy greens, cherry tomatoes, and strawberries are great for small space gardening.</li>
+            <li id="communityGardening"><strong>Participate in Community Gardening:</strong> If space is too limited at home, look into local community gardens where you can tend to your own plot.</li>
+        </ul>
+        <p id="apartmentGardeningResources">For more inspiration and guidance on gardening in small spaces, check out this comprehensive guide from <a href="https://www.balconycontainergardening.com/" target="_blank">Balcony Container Gardening</a> and the book "The Vegetable Gardener's Container Bible" by Edward C. Smith.</p>
+    </section>    
+<h2 id="resourcesLowIncomeTitle">Resources for Low-Income Gardeners</h2>
+<p id="resourcesLowIncomeDesc">Gardening should be accessible to everyone. Here are some resources specifically aimed at supporting low-income individuals in starting their gardens:</p>
+<ul id="resourcesLowIncomeList">
+<li><a href="https://www.snapgardens.org/snap-participant/" target="_blank" id="snapGardensLink">SNAP Gardens</a>: Information on using SNAP benefits for buying seeds and plants.</li>
+<li><a href="https://communitygarden.org/" target="_blank" id="communityGardeningLink">American Community Gardening Association</a>: Find a community garden near you or learn how to start one.</li>
+<li><a href="https://seedmoney.org/" target="_blank" id="seedMoneyLink">SeedMoney</a>: Offers grants and crowdfunding opportunities for garden projects.</li>
+</ul>
+</section>
+
+</div>
+<a href="{{ url_for('welcome') }}" id="backToHomeLink">Back to Home</a>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='translations.js') }}"></script>
+</body>
+</html>
